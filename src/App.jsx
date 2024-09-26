@@ -14,10 +14,10 @@ export default function App() {
       <Layout>
         <Suspense>
           <Routes>
-            <Route />
-            <Route />
-            <Route />
-            <Route />
+            <Route path="/" element={<HomePage />} />
+            <Route path="/register" element={<RegistrationPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/path" element={<ContactsPage />} />
           </Routes>
         </Suspense>
       </Layout>
