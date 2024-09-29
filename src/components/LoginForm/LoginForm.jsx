@@ -6,6 +6,7 @@ import { logIn } from "../../redux/auth/operations";
 export default function LoginForm() {
   const dispatch = useDispatch();
   const handleSubmit = (values, actions) => {
+    console.log("LoginForm values:");
     console.log(values);
     dispatch(logIn(values));
     actions.resetForm();

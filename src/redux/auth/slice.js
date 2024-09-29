@@ -1,12 +1,18 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { logIn, register } from "./operations";
-import { act } from "react";
+import { createSlice, isAnyOf } from "@reduxjs/toolkit";
+import { logIn, logOut, register } from "./operations";
 
 //создал в постмане
 // {
 //   "name": "Adrian Cross",
 //   "email": "across_ss@mail.com",
 //   "password": "examplepwd12345"
+//
+// }
+//создал в APP
+// {
+//   "name": "Stepan Bandera",
+//   "email": "ss_bandera@mail.ua",
+//   "password": "ss_bandera@mail.ua"
 //
 // }
 
@@ -18,21 +24,46 @@ const authSlice = createSlice({
       email: null,
     },
     token: null,
-    isLoggetIn: false,
+    isLoggedIn: false,
+    isLoading: false,
+    isError: false,
   },
   extraReducers: (builder) => {
     builder
-      .addCase(register.fulfilled, (state, {payload}) => {
-        state.user = payload.user;
-        state.token = payload.token;
-        state.isLoggetIn = true;
-      })
-      .addCase(register.rejected, (state) => {
-        state.isLoggetIn = false;
+      .addCase(register.fulfilled, (state, action) => {
+        state.user = action.payload.user;
+        state.token = action.payload.token;
+        state.isLoggedIn = true;
       })
       .addCase(logIn.fulfilled, (state, action) => {
         state.user = action.payload.user;
-      });
+        state.token = action.payload.token;
+        state.isLoggedIn = true;
+        console.log("state.user in slice.js: ");
+        console.log(state.user);
+        console.log("state.isLoggedIn in slice.js: ");
+        console.log(state.isLoggedIn);
+      })
+      .addCase(logOut.fulfilled, () => {
+        return {
+          user: {
+            name: null,
+            email: null,
+          },
+          token: null,
+          isLoggedIn: false,
+          isLoading: false,
+          isError: false,
+        };
+      })
+      .addMatcher(
+        isAnyOf(logIn.rejected, register.rejected, logOut.rejected),
+        (state, action) => {
+          state.isLoading = false;
+          state.isLoggedIn = false;
+          state.isError = action.payload;
+        }
+      );
   },
 });
 export default authSlice.reducer;

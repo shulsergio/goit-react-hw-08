@@ -1,6 +1,7 @@
 // import { Helmet } from "react-helmet-async";
 
 export default function HomePage() {
+  console.log("Rendered HomePage");
   return (
     <>
       {/* <Helmet>

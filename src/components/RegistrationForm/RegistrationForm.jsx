@@ -5,11 +5,14 @@ import { register } from "../../redux/auth/operations";
 
 export default function RegistrationForm() {
   const dispatch = useDispatch();
+
   const handleSubmit = (values, actions) => {
+    console.log("Registration values");
     console.log(values);
     dispatch(register(values));
     actions.resetForm();
   };
+
   return (
     <>
       <Formik
@@ -18,7 +21,7 @@ export default function RegistrationForm() {
           email: "",
           password: "",
         }}
-        onsubmit={handleSubmit}
+        onSubmit={handleSubmit}
       >
         <Form className={css.form} autoComplete="off">
           <label className={css.labelName}>
