@@ -30,6 +30,7 @@ const slice = createSlice({
       })
       .addCase(addContact.fulfilled, (state, { payload }) => {
         state.loading = false;
+
         state.items.push(payload);
       })
       .addCase(addContact.rejected, (state, { payload }) => {
@@ -44,6 +45,7 @@ const slice = createSlice({
       })
       .addCase(deleteContact.fulfilled, (state, { payload }) => {
         state.loading = false;
+
         state.items = state.items.filter(({ id }) => id !== payload);
       })
       .addCase(deleteContact.rejected, (state, { payload }) => {

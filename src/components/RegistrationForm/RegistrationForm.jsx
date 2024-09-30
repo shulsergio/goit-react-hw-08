@@ -2,11 +2,13 @@ import { Field, Form, Formik } from "formik";
 import css from "./RegistrationForm.module.css";
 import { useDispatch } from "react-redux";
 import { register } from "../../redux/auth/operations";
+import toast from "react-hot-toast";
 
 export default function RegistrationForm() {
   const dispatch = useDispatch();
 
   const handleSubmit = (values, actions) => {
+    toast.success("User created!");
     console.log("Registration values");
     console.log(values);
     dispatch(register(values));
@@ -14,7 +16,8 @@ export default function RegistrationForm() {
   };
 
   return (
-    <>
+    <div className={css.box}>
+      <h2 className={css.header}>Please register</h2>
       <Formik
         initialValues={{
           name: "",
@@ -24,20 +27,35 @@ export default function RegistrationForm() {
         onSubmit={handleSubmit}
       >
         <Form className={css.form} autoComplete="off">
-          <label className={css.labelName}>
-            Name
-            <Field type="text" name="name" />
+          <label className={css.label}>
+            <Field
+              className={css.field}
+              type="text"
+              name="name"
+              placeholder="Name"
+            />
           </label>
-          <label className={css.labelEmail}>
-            E-mail
-            <Field type="email" name="email" />
+          <label className={css.label}>
+            <Field
+              className={css.field}
+              type="email"
+              name="email"
+              placeholder="E-mail"
+            />
           </label>
-          <label className={css.labelPassword}>
-            <Field type="password" name="password" />
+          <label className={css.label}>
+            <Field
+              className={css.field}
+              type="password"
+              name="password"
+              placeholder="Password"
+            />
           </label>
-          <button type="submit">Register</button>
+          <button className={css.button} type="submit">
+            Register
+          </button>
         </Form>
       </Formik>
-    </>
+    </div>
   );
 }

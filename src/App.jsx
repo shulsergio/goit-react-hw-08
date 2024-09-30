@@ -1,4 +1,5 @@
 import "./App.css";
+import { Toaster } from "react-hot-toast";
 import { lazy } from "react";
 import Layout from "./components/Layout/Layout";
 import { Route, Routes } from "react-router-dom";
@@ -18,6 +19,7 @@ export default function App() {
   console.log("isLoggedIn in App component:", isLoggedIn);
   return (
     <>
+      <Toaster position="top-right" />
       <Layout>
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -26,7 +28,7 @@ export default function App() {
             path="/register"
             element={
               <RestrictedRoute
-                redirectTo="/tasks"
+                redirectTo="/contacts"
                 component={<RegistrationPage />}
               />
             }

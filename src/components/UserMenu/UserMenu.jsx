@@ -15,6 +15,7 @@ const UserMenu = () => {
     <div className={css.box}>
       <p className={css.textBox}>Hello, {user.name}</p>
       <button
+        className={css.button}
         onClick={() => {
           dispatch(logOut());
         }}

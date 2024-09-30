@@ -10,7 +10,7 @@ const Navigation = () => {
   /////// ТУТ СЕЛЕКТОР selectIsLoggedIn
   return (
     <>
-      <nav>
+      <nav className={css.nav}>
         <NavLink className={css.navLink} to="/">
           Home
         </NavLink>

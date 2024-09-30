@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import css from "./ContactForm.module.css";
 import { useDispatch } from "react-redux";
 import { addContact } from "../../redux/contacts/operations";
+import { toast } from "react-hot-toast";
 
 const ContactForm = () => {
   const validationSchema = Yup.object({
@@ -21,6 +22,7 @@ const ContactForm = () => {
   };
 
   const handleSubmit = (values, { resetForm }) => {
+    toast.success("Contact created!");
     dispatch(
       addContact({
         name: values.name,

@@ -13,7 +13,8 @@ export default function LoginForm() {
   };
 
   return (
-    <>
+    <div className={css.box}>
+      <h2 className={css.header}>Please enter login</h2>
       <Formik
         initialValues={{
           email: "",
@@ -22,16 +23,27 @@ export default function LoginForm() {
         onSubmit={handleSubmit}
       >
         <Form className={css.form} autoComplete="off">
-          <label className={css.labelEmail}>
-            E-mail
-            <Field className={css.field} type="email" name="email" />
+          <label className={css.label}>
+            <Field
+              className={css.field}
+              type="email"
+              name="email"
+              placeholder="E-mail"
+            />
           </label>
-          <label className={css.labelPassword}>
-            <Field className={css.field} type="password" name="password" />
+          <label className={css.label}>
+            <Field
+              className={css.field}
+              type="password"
+              name="password"
+              placeholder="Password"
+            />
           </label>
-          <button type="submit">Log In</button>
+          <button className={css.button} type="submit">
+            Log In
+          </button>
         </Form>
       </Formik>
-    </>
+    </div>
   );
 }
