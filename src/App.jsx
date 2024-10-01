@@ -1,12 +1,14 @@
 import "./App.css";
 import { Toaster } from "react-hot-toast";
-import { lazy } from "react";
+import { lazy, useEffect } from "react";
 import Layout from "./components/Layout/Layout";
 import { Route, Routes } from "react-router-dom";
 import { RestrictedRoute } from "./components/RestrictedRoute/RestrictedRoute";
 import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
-import { useSelector } from "react-redux";
-import { selectIsLoggedIn } from "./redux/auth/selectors";
+import { useDispatch, useSelector } from "react-redux";
+import { selectIsLoggedIn, selectIsRefreshing } from "./redux/auth/selectors";
+import { refreshUser } from "./redux/auth/operations";
+import Loader from "./components/Loader/Loader";
 
 export default function App() {
   const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
@@ -17,9 +19,19 @@ export default function App() {
   const ContactsPage = lazy(() => import("./pages/ContactsPage/ContactsPage"));
   const isLoggedIn = useSelector(selectIsLoggedIn);
   console.log("isLoggedIn in App component:", isLoggedIn);
-  return (
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
+
+  const isRefreshing = useSelector(selectIsRefreshing);
+
+  return isRefreshing ? (
+    <Loader />
+  ) : (
     <>
-      <Toaster position="top-right" />
+      <Toaster position="top-center" />
       <Layout>
         <Routes>
           <Route path="/" element={<HomePage />} />

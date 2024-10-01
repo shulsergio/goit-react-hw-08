@@ -7,7 +7,7 @@ export default function HomePage() {
       {/* <Helmet>
         <title>Contacts app</title>
       </Helmet> */}
-      <p>Contacts data for home work 8</p>
+      <h1>Contacts data base</h1>
     </>
   );
 }

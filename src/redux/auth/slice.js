@@ -1,5 +1,5 @@
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
-import { logIn, logOut, register } from "./operations";
+import { logIn, logOut, refreshUser, register } from "./operations";
 
 //создал в постмане
 // {
@@ -27,6 +27,7 @@ const authSlice = createSlice({
     isLoggedIn: false,
     isLoading: false,
     isError: false,
+    isRefreshing:false,
   },
   extraReducers: (builder) => {
     builder
@@ -54,7 +55,13 @@ const authSlice = createSlice({
           isLoggedIn: false,
           isLoading: false,
           isError: false,
+          isRefreshing: false,
         };
+      })
+      .addCase(refreshUser.fulfilled, (state, action) => {
+        state.user = action.payload;
+        state.isRefreshing = false;
+        state.isLoggedIn = true;
       })
       .addMatcher(
         isAnyOf(logIn.rejected, register.rejected, logOut.rejected),

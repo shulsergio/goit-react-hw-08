@@ -9,4 +9,11 @@
   font-weight: 600;
   font-size: 20px;
   color: black;
+  outline: none;
+  transition: color 0.4s ease;
+}
+.navLink:hover,
+.navLink:active {
+  cursor: pointer;
+  color: blue;
 }

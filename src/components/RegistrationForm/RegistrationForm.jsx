@@ -8,16 +8,23 @@ export default function RegistrationForm() {
   const dispatch = useDispatch();
 
   const handleSubmit = (values, actions) => {
-    toast.success("User created!");
     console.log("Registration values");
     console.log(values);
-    dispatch(register(values));
+    dispatch(register(values))
+      .unwrap()
+      .then(() => {
+        toast.success("Good! User created!");
+      })
+      .catch(() => {
+        toast.error("Error, mistake!");
+      });
     actions.resetForm();
   };
 
   return (
     <div className={css.box}>
-      <h2 className={css.header}>Please register</h2>
+      <h2 className={css.header}>Register</h2>
+      <p className={css.text}>Create a new account here</p>
       <Formik
         initialValues={{
           name: "",

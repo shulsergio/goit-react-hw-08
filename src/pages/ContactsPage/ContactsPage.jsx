@@ -17,7 +17,6 @@ export default function ContactsPage() {
 
   return (
     <>
-      <h1>Phonebook</h1>
       <ContactForm />
       {loading && <Loader />}
       {/* {error && <Heading title="Its wrong" />} */}

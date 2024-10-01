@@ -40,14 +40,15 @@ const ContactForm = () => {
       onSubmit={handleSubmit}
     >
       <Form className={css.classBox}>
+        <p className={css.text}>Add contact to data base</p>
         <div className={css.inputBlock}>
-          <label htmlFor="name">Name</label>
-          <Field type="text" name="name" />
+          <label htmlFor="name"></label>
+          <Field type="text" name="name" placeholder="Name" />
           <ErrorMessage name="name" component="div" className={css.error} />
         </div>
         <div className={css.inputBlock}>
-          <label htmlFor="number">Number</label>
-          <Field type="text" name="number" />
+          <label htmlFor="number"></label>
+          <Field type="text" name="number" placeholder="Phone number" />
           <ErrorMessage name="number" component="div" className={css.error} />
         </div>
 
