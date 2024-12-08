@@ -7,8 +7,6 @@ import { toast } from "react-hot-toast";
 export default function LoginForm() {
   const dispatch = useDispatch();
   const handleSubmit = (values, actions) => {
-    console.log("LoginForm values:");
-    console.log(values);
     dispatch(logIn(values))
       .unwrap()
       .then(() => {
